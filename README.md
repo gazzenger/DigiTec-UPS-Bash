@@ -77,3 +77,9 @@ To run the program, simply navigate to the drivers folder and run the command
 To speed everything up, the script can be adapted to detect a drop in the voltage for starting the power down procedure.
 
 
+## Found software is at the following location
+http://www.apollotw.com//product-12/monitoring-software
+http://www.apollotw.com/p-detail-15/upsmart-networking-v2.4.html
+http://www.apollotw.com/p-detail-24/upsmart-dry-contact-v3.4.html
+
+
