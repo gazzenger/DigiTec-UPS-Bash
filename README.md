@@ -83,3 +83,13 @@ http://www.apollotw.com/p-detail-15/upsmart-networking-v2.4.html
 http://www.apollotw.com/p-detail-24/upsmart-dry-contact-v3.4.html
 
 
+Other links
+http://www.gruppidicontinuita.eu/softwares-2/upssmart/ (including UPSMon)
+https://www.gembird.nl/service.aspx?item=5706
+
+Other Software
+WinPower, http://www.ups-software-download.com/
+http://openupsmart.sourceforge.net/
+http://www.tech-info.it/downloadsoftware.htm
+
+
