@@ -63,7 +63,10 @@ deb-src http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free r
 
 To speed everything up, the script can be adapted to detect a drop in the voltage for starting the power down procedure.
 
-
+The ups.sh script, ensure to install bc
+```bash
+$ sudo apt-get install bc
+```
 
 
 
