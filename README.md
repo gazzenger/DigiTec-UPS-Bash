@@ -1,29 +1,31 @@
 # DigiTec-UPS-Bash
-
-
 This program uses NUT
 https://networkupstools.org
 https://github.com/networkupstools/nut
 
-To install (usually) run
+As the Digitech UPS is not natively supported by NUT, the NUT packages must be rebuilt.
+
+The following is taken from,
+https://github.com/networkupstools/nut/wiki/Building-NUT-on-Debian,-Raspbian-and-Ubuntu
+Along with a few modifications from,
+https://github.com/networkupstools/nut/issues/674
+
+
+1) make sure you have uncommented "deb-src" lines to match the "deb" lines in /etc/apt/sources*
 ```bash
-sudo apt-get install nut
+deb-src http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi
 ```
 
-
-However for building from source code on debian
-https://github.com/networkupstools/nut/wiki/Building-NUT-on-Debian,-Raspbian-and-Ubuntu
-
-
-make sure you have uncommented "deb-src" lines to match the "deb" lines in /etc/apt/sources*
-run sudo apt-get update if you had to change any sources
-run sudo apt-get build-dep nut
-optional: remove asciidoc (or install the build-deps manually, and omit asciidoc) to save a bit of build time
-run sudo apt-get -y install git if you do not already have Git installed
-clone the source to your working directory: git clone https://github.com/networkupstools/nut.git
-cd nut and run ./autogen.sh
-
-Create the config
+1) run sudo apt-get update if you had to change any sources
+1) run sudo apt-get build-dep nut
+1) run sudo apt-get -y install git if you do not already have Git installed
+1) clone the source to your working directory: git clone https://github.com/networkupstools/nut.git
+1) cd nut
+1) git remote add -f marianojan https://github.com/marianojan/nut.git
+    git merge marianojan/hunnox-hnx850
+    Fix any merge conflicts with drivers/Makefile.am, which i was able to clear up (add in the hunnox driver)
+1) run ./autogen.sh
+1) run this mega-command (this prepares the config):
 ```bash
 ./configure --includedir=/usr/include --mandir=/usr/share/man \
 --infodir=/usr/share/info --sysconfdir=/etc/nut --localstatedir=/var \
@@ -37,16 +39,10 @@ Create the config
 --with-user=nut --with-group=nut --with-udev-dir=/lib/udev \
 --with-systemdsystemunitdir=/lib/systemd/system
 ```
-
-run make
-You can either run the drivers from the source tree, or run sudo make install from the drivers directory to partially overwrite the contents of the NUT .deb files.
-
-Create a ups.conf file in the config folder
-
-For the Digitech UPS, following the guidance here
-https://github.com/networkupstools/nut/issues/674
-
-The ups.conf file should be
+1) run make
+1) cd to /etc/nut/
+1) Update the ups.conf with the following
+```bash
 [myups]
   driver = "nutdrv_qx"
   desc = "DigiTech 650VA UPS"
@@ -57,24 +53,18 @@ The ups.conf file should be
   langid_fix = "0x0409"
   novendor
   noscanlangid
-
-Ensure to have performed the following 
-
-
-    git clone https://github.com/networkupstools/nut.git
-    cd nut
-    git remote add -f marianojan https://github.com/marianojan/nut.git
-    git merge marianojan/hunnox-hnx850
-    I had a conflict with the drivers/Makefile.am, which i was able to clear up (add in the hunnox driver)
-
-To run the program, simply navigate to the drivers folder and run the command
-
+```
+1) cd ~/nut/drivers
+1) run sudo make install
+1) next run the following command to start the connection
 ```bash
 ./nutdrv_qx -a myups -DDDDD
 ```
 
-
 To speed everything up, the script can be adapted to detect a drop in the voltage for starting the power down procedure.
+
+
+
 
 
 ## Found software is at the following location
