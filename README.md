@@ -67,7 +67,12 @@ The ups.sh script, ensure to install bc
 ```bash
 $ sudo apt-get install bc
 ```
-
+1) IMPORTANT! If shutting down the Pi, ensure to disable the following OR ELSE the UPS will power down as well
+Comment out the following line in the file /lib/systemd/system-shutdown/nutshutdown
+```bash
+#!/bin/sh
+#/sbin/upsmon -K >/dev/null 2>&1 && /sbin/upsdrvctl shutdown   <--- COMMENT OUT THIS LINE
+```
 
 
 ## Found software is at the following location
